@@ -96,9 +96,29 @@
       }
 
       $caio = new Employee ('caio' , 'santin' , "10/4/1989" ,'M' , "burn stuff" , "400$/week");
-      echo $caio;
+      echo $cai0;
 
-      
+      class Boss extends Employee {
+        private $benefits;
+        public function __construct($name,$lastName,$dateOfBirth,$genre,$tasks,$salary,$benefits){
+          parent::__construct($name,$lastName,$dateOfBirth,$genre,$tasks,$salary);
+          $this -> setBenefits($benefits);
+        }
+        public function setBenefits($benefits){
+          $this -> benefits = $benefits;
+        }
+        public function getBenefits(){
+          return $this -> benefits;
+        }
+        public function __toString(){
+          return parent::__toString()
+          ."<h6>" . $this -> getBenefits() . "</h6>";
+        }
+      }
+
+      $tulio = new Boss('Tulio','piscopo',"1/1/1899", 'X' , 'Nothing' , 'TooMuch/s','Personal Boat');
+
+      echo $tulio;
      ?>
 
   </body>
