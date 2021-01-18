@@ -31,7 +31,7 @@
           $this -> lastName = $lastName;
         }
         public function getLastName(){
-          return $this -> lastname;
+          return $this -> lastName;
         }
         public function setDateOfBirth($dateOfBirth){
           $this -> dateOfBirth = $dateOfBirth;
@@ -45,7 +45,6 @@
         public function getGenre(){
           return $this -> genre;
         }
-
         public function getAge(){
           $x = strtotime(str_replace("/","-", $this -> dateOfBirth));
           $tdate = time();
@@ -55,11 +54,51 @@
           }
           return $age;
         }
+        public function __toString(){
+          return '<ul>'
+            . '<li>name: ' . $this -> getName() .'</li>'
+            . '<li>lastname: ' . $this -> getLastName() .'</li>'
+            . '<li>age: ' . $this -> getAge() .'</li>'
+            . '<li>genre: ' . $this -> getGenre() .'</li></ul>';
+        }
       }
 
       $gigio = new Person('gigio','fracul',"10/10/2001", 'F');
+      $bruno = new Person('bruno','brespa','25/12/1980' ,'M');
 
-      echo $gigio -> getName() . $gigio -> getDateOfBirth() . "<br>" . $gigio -> getAge();
+      echo $gigio . $bruno;
+
+      class Employee extends Person{
+        private $tasks;
+        private $salary;
+        public function __construct($name,$lastName,$dateOfBirth,$genre,$tasks,$salary){
+          parent::__construct($name,$lastName,$dateOfBirth, $genre);
+          $this -> setSalary($salary);
+          $this -> setTasks($tasks);
+        }
+        public function setTasks($tasks){
+          $this -> tasks = $tasks;
+        }
+        public function getTasks(){
+          return $this -> tasks;
+        }
+        public function setSalary($salary){
+          $this -> salary = $salary;
+        }
+        public function getSalary(){
+          return $this -> salary;
+        }
+        public function __toString(){
+          return parent::__toString()
+          . "<ul><li>" . "DO : " . $this -> getTasks() . "</li>"
+          ."<li>" . "TAKE : " . $this -> getSalary() . "</li></ul>";
+        }
+      }
+
+      $caio = new Employee ('caio' , 'santin' , "10/4/1989" ,'M' , "burn stuff" , "400$/week");
+      echo $caio;
+
+      
      ?>
 
   </body>
