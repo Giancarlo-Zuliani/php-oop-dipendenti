@@ -116,7 +116,7 @@
         }
       }
 
-      $tulio = new Boss('Tulio','piscopo',"1/1/1899", 'X' , 'Nothing' , 'TooMuch/s','Personal Boat');
+      $tulio = new Boss('Tulio','piscopo',"1/1/1919", 'X' , 'Nothing' , 'TooMuch/s','Personal Boat');
 
       echo $tulio;
      ?>
