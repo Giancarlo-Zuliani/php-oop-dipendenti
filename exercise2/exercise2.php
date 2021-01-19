@@ -171,7 +171,12 @@
 
         $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
 
-        echo $boss;
+      try {
+        $newperson = new Person('ca' , 'zu' , '11/11/2011' ,'m');
+      } catch (Exception $e) {
+        echo $e;
+      }
+
 
     ?>
   </body>
