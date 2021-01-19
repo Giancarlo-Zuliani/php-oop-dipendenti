@@ -1,0 +1,12 @@
+*{
+  padding:0;
+  margin:0;
+}
+h4{
+  color: crimson;
+  padding:15px;
+}
+hr{
+  color: red;
+  margin-top:25px;
+}

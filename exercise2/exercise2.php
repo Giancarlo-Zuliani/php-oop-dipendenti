@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>php-oop-dipendenti-2</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="style/style.css">
   </head>
   <body>
 
@@ -195,23 +195,26 @@
         $emparr = [];
         array_push($emparr , $a ,$b , );
         $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
-        $bestBoss = new Boss('mega' , 'direttore' , '25/12/1998', 'F' ,'megadirettore' , 20000 , 8 , 'personal boat party every week' );
+        $bestBoss = new Boss('m' , 'direttore' , '25/12/1998', 'asd' ,'megadirettore' , 200 , 8 , 'personal boat party every week' );
       }
 
         catch (invalidName $e) {
-          echo 'name or last name too short';
+          echo '<h4>name or last name too short</h4> <br>';
         }
         catch (invalidRal $e){
-          echo 'R.A.L not valid';
+          echo '<h4>R.A.L not valid</h4> <br>' ;
         }
         catch (invalidSecLvl $e){
-          echo "invalid security level";
+          echo "<h4>invalid security level</h4> <br>";
         }
         catch (invalidGenre $e){
-          echo 'invalid genre character';
+          echo '<h4>invalid genre character</h4> <br>';
         }
         catch(invalidEmployeesList $e){
-          echo 'invalid employees list';
+          echo '<h4>invalid employees list</h4> <br>';
+        }
+        finally{
+          echo '<hr>';
         }
 
     ?>
