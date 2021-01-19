@@ -120,11 +120,15 @@
           $this -> secLvl = $secLvl;
         }
 
+        public function getSecLvl(){
+          return $this -> secLvl;
+        }
+
         public function __toString(){
           return parent::__toString()
-          . "<h5>tasks: " . $this -> tasks . "</h5>"
-          . "<h5>Ral: " . $this -> ral . "</h5>"
-          . "<h5>seclvl: " . $this -> secLvl . "</h5>";
+          . "<h5>tasks: " . $this -> getTasks() . "</h5>"
+          . "<h5>Ral: " . $this -> getRal() . "</h5>"
+          . "<h5>seclvl: " . $this -> getSecLvl() . "</h5>";
         }
       }
 
@@ -176,17 +180,18 @@
           }
           $this -> secLvl = $secLvl;
         }
-
+        public function getSecLvl(){
+          return $this -> secLvl;
+        }
         public function __toString(){
           return
             '<h5>name: ' . $this -> getName() .'</h5>'
           . '<h5>lastname: ' . $this -> getLastName() .'</h5>'
           . '<h5>age: ' . $this -> getAge() .'</h5>'
           . '<h5>genre: ' . $this -> getGenre() .'</h5>'
-          . "<h5>tasks: " . $this -> tasks . "</h5>"
-          . "<h5>Ral: " . $this -> ral . "</h5>"
-          . "<h5>seclvl: " . $this -> secLvl . "</h5>"
-          ."<h5> secLVL: " . $this -> secLvl ."</h5>"
+          . "<h5>tasks: " . $this -> getTasks() . "</h5>"
+          . "<h5>Ral: " . $this -> getRal() . "</h5>"
+          ."<h5> secLVL: " . $this -> getSecLvl() ."</h5>"
           . "<h5>" . $this -> benefits ."</h5>"
           . $this -> getEmployeesStr();
         }
@@ -204,10 +209,11 @@
             $emparr = [];
             array_push($emparr , $a ,$b);
             $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
-            $bestBoss = new Boss('mega' , 'direttore' , '25/12/1998', 'f' ,'megadirettore' , 20000 , 8 , 'personal boat party every week',$emparr );
+            $bestBoss = new Boss('mega' , 'er' , '25/12/1998', 'f' ,'megadirettore' , 20000 , 8 , 'personal boat party every week',$emparr );
           }
 
           catch (Exception $e) {
+            echo "<hr>";
             echo '<h4>'. $e -> getMessage() .'</h4><br>';
           }
 
