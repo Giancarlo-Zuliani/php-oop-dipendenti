@@ -24,7 +24,7 @@
 
         public function setName($name){
           if (strlen($name) < 3){
-            throw new invalidName;
+            throw new Exception('name must contain at least 3 character');
           };
           $this -> name  = $name;
         }
@@ -35,7 +35,7 @@
 
         public function setLastName($lastname){
           if(strlen($lastname) < 3){
-            throw new invalidName;
+            throw new Exception('name must contain at least 3 character');
           }
           $this -> lastname = $lastname;
         }
@@ -53,7 +53,7 @@
 
         public function setGenre($genre){
           if(!(strtolower($genre) == "m" || strtolower($genre) == "f")){
-            throw new invalidGenre;
+            throw new Exception('genre must be declared with M or F');
           }
           $this -> genre = $genre;
         }
@@ -73,11 +73,11 @@
         }
 
         public function __toString(){
-          return '<ul>'
-            . '<li>name: ' . $this -> getName() .'</li>'
-            . '<li>lastname: ' . $this -> getLastName() .'</li>'
-            . '<li>age: ' . $this -> getAge() .'</li>'
-            . '<li>genre: ' . $this -> getGenre() .'</li></ul>';
+          return
+              '<h5>name: ' . $this -> getName() .'</h5>'
+            . '<h5>lastname: ' . $this -> getLastName() .'</h5>'
+            . '<h5>age: ' . $this -> getAge() .'</h5>'
+            . '<h5>genre: ' . $this -> getGenre() .'</h5>';
         }
       }
 
@@ -104,7 +104,7 @@
 
         public function setRal($ral){
           if ($ral > 100000 || $ral < 10000){
-            throw new invalidRal;
+            throw new Exception('R.A.L must be set between 10.000 and 100.000');
           }
           $this -> ral = $ral;
         }
@@ -115,16 +115,16 @@
 
         public function setSecLvl($secLvl){
           if($secLvl < 1 || $secLvl > 5 ){
-            throw new invalidSecLvl;
+            throw new Exception('Employee security level must be between 1 and 5');
           }
           $this -> secLvl = $secLvl;
         }
 
         public function __toString(){
           return parent::__toString()
-          . "tasks: " . $this -> tasks
-          . "Ral: " . $this -> ral
-          ."seclvl: " . $this -> secLvl;
+          . "<h5>tasks: " . $this -> tasks . "</h5>"
+          . "<h5>Ral: " . $this -> ral . "</h5>"
+          . "<h5>seclvl: " . $this -> secLvl . "</h5>";
         }
       }
 
@@ -135,6 +135,7 @@
 
         public function __construct($name,$lastname,$dateofbirth,$genre,$tasks,$ral,$secLvl,$benefits,$Employees = []){
           parent::__construct($name,$lastname,$dateofbirth,$genre,$tasks,$ral,$secLvl);
+          $this -> setSecLvl($secLvl);
           $this -> setBenefits($benefits);
           $this -> setEmployees($Employees);
         }
@@ -153,71 +154,73 @@
 
         public function setEmployees($Employees){
           if ($Employees == [] || !is_array($Employees)){
-            throw new invalidEmployeesList;
+            throw new Exception('employees list must contain at least one Employee');
           }
           $this -> Employees = $Employees;
         }
 
         public function getEmployeesStr(){
-          $str = "";
+          $str = "<ol><h4> Employees list</h4>";
           for ($i=0; $i < count($this -> getEmployees()) ; $i++) {
             $emp = $this -> getEmployees()[$i];
             $empname = $emp -> getName() . ' ' . $emp -> getLastName();
-            $str .= ($i + 1) . ': ' . $empname . '<br>';
+            $str .= "<li>" . $empname . '</li>';
           }
+          $str .= "</ol>";
           return $str;
         }
 
         public function setSecLvl($secLvl){
           if($secLvl < 6 || $secLvl > 10){
-            throw new invalidSecLvl;
+            throw new Exception('security level for Boss must be between 5 and 10');
           }
           $this -> secLvl = $secLvl;
         }
 
         public function __toString(){
-          return parent::__toString()
-          . "<h3>" . $this -> benefits ."</h3>"
+          return
+            '<h5>name: ' . $this -> getName() .'</h5>'
+          . '<h5>lastname: ' . $this -> getLastName() .'</h5>'
+          . '<h5>age: ' . $this -> getAge() .'</h5>'
+          . '<h5>genre: ' . $this -> getGenre() .'</h5>'
+          . "<h5>tasks: " . $this -> tasks . "</h5>"
+          . "<h5>Ral: " . $this -> ral . "</h5>"
+          . "<h5>seclvl: " . $this -> secLvl . "</h5>"
+          ."<h5> secLVL: " . $this -> secLvl ."</h5>"
+          . "<h5>" . $this -> benefits ."</h5>"
           . $this -> getEmployeesStr();
         }
       }
+      ?>
 
-      class invalidName extends Exception{};
-      class invalidRal extends Exception{};
-      class invalidSecLvl extends Exception{};
-      class invalidEmployeesList extends Exception{};
-      class invalidGenre extends Exception{};
+      <main>
 
-      try {
+        <?php
 
-        $a = new Employee('tozzi' , 'fan' , "25/12/1989" , "M" , "ragioniere" , 10001 , 4);
-        $b = new Employee('fan' ,'tozzi' , '25/15/1988' , "F" , "capitano", 15000 , 3);
-        $emparr = [];
-        array_push($emparr , $a ,$b);
-        $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
-        $bestBoss = new Boss('m' , 'direttore' , '25/12/1998', 'asd' ,'megadirettore' , 200 , 8 , 'personal boat party every week' );
-      }
+          try {
 
-        catch (invalidName $e) {
-          echo '<h4>name or last name too short</h4> <br>';
-        }
-        catch (invalidRal $e){
-          echo '<h4>R.A.L not valid</h4> <br>' ;
-        }
-        catch (invalidSecLvl $e){
-          echo "<h4>invalid security level</h4> <br>";
-        }
-        catch (invalidGenre $e){
-          echo '<h4>invalid genre character</h4> <br>';
-        }
-        catch(invalidEmployeesList $e){
-          echo '<h4>invalid employees list</h4> <br>';
-        }
-        finally{
-          echo '<hr>';
-        }
+            $a = new Employee('tozzi' , 'fan' , "25/12/1989" , "M" , "ragioniere" , 10001 , 4);
+            $b = new Employee('fan' ,'tozzi' , '25/15/1988' , "F" , "capitano", 15000 , 3);
+            $emparr = [];
+            array_push($emparr , $a ,$b);
+            $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
+            $bestBoss = new Boss('mega' , 'direttore' , '25/12/1998', 'f' ,'megadirettore' , 20000 , 8 , 'personal boat party every week',$emparr );
+          }
 
-    ?>
+          catch (Exception $e) {
+            echo '<h4>'. $e -> getMessage() .'</h4><br>';
+          }
+
+          finally{
+            echo '<hr>';
+            echo $bestBoss;
+            echo '<hr>';
+          }
+
+        ?>
+
+      </main>
+
 
   </body>
 </html>

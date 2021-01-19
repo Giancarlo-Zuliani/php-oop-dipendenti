@@ -2,11 +2,26 @@
   padding:0;
   margin:0;
 }
+
+main{
+  width:50%;
+  margin:25px auto;
+  text-align:center;
+}
+
 h4{
   color: crimson;
   padding:15px;
 }
+
 hr{
   color: red;
-  margin-top:25px;
+  margin:25px;
+}
+h5{
+  font-size: 1.5rem;
+}
+ol{
+  list-style:upper-roman;
+  margin-left: 25px;
 }
