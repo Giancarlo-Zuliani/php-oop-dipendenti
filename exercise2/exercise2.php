@@ -23,7 +23,7 @@
         }
         public function setName($name){
           if (strlen($name) < 3){
-            throw new Exception("name need at least 3 charact");
+            throw new invalidName;
           };
           $this -> name  = $name;
         }
@@ -32,7 +32,7 @@
         }
         public function setLastName($lastname){
           if(strlen($lastname) < 3){
-            throw new Exception("last name need at least 3 charact");
+            throw new invalidName;
           }
           $this -> lastname = $lastname;
         }
@@ -47,7 +47,7 @@
         }
         public function setGenre($genre){
           if(!(strtolower($genre) == "m" || strtolower($genre) == "f")){
-            throw new Exception("Genre must be indentified with m or f");
+            throw new invalidGenre;
           }
           $this -> genre = $genre;
         }
@@ -92,7 +92,7 @@
         }
         public function setRal($ral){
           if ($ral > 100000 || $ral < 10000){
-            throw new Exception("Ral not in range");
+            throw new invalidRal;
           }
           $this -> ral = $ral;
         }
@@ -101,7 +101,7 @@
         }
         public function setSecLvl($secLvl){
           if($secLvl < 1 || $secLvl > 5 ){
-            throw new Exception("Security level not in range for Employee");
+            throw new invalidSecLvl;
           }
           $this -> secLvl = $secLvl;
         }
@@ -117,11 +117,11 @@
 
       class Boss extends Employee {
         private $benefits;
-        private $employes;
-        public function __construct($name,$lastname,$dateofbirth,$genre,$tasks,$ral,$secLvl,$benefits,$employes){
+        private $Employees;
+        public function __construct($name,$lastname,$dateofbirth,$genre,$tasks,$ral,$secLvl,$benefits,$Employees = []){
           parent::__construct($name,$lastname,$dateofbirth,$genre,$tasks,$ral,$secLvl);
           $this -> setBenefits($benefits);
-          $this -> setEmployes($employes);
+          $this -> setEmployees($Employees);
         }
         public function setBenefits($benefits){
           $this -> benefits = $benefits;
@@ -129,19 +129,19 @@
         public function getBenefits(){
           return $this -> benefits;
         }
-        public function getEmployes(){
-          return $this -> employes;
+        public function getEmployees(){
+          return $this -> Employees;
         }
-        public function setEmployes($employes){
-          if ($employes == [] || !is_array($employes)){
-            throw new Exception("employes list not valid");
+        public function setEmployees($Employees){
+          if ($Employees == [] || !is_array($Employees)){
+            throw new invalidEmployeesList;
           }
-          $this -> employes = $employes;
+          $this -> Employees = $Employees;
         }
-        public function getEmployesStr(){
+        public function getEmployeesStr(){
           $str = "";
-          for ($i=0; $i < count($this -> getEmployes()) ; $i++) {
-            $emp = $this -> getEmployes()[$i];
+          for ($i=0; $i < count($this -> getEmployees()) ; $i++) {
+            $emp = $this -> getEmployees()[$i];
             $empname = $emp -> getName() . ' ' . $emp -> getLastName();
             $str .= ($i + 1) . ': ' . $empname . '<br>';
           }
@@ -149,17 +149,22 @@
         }
         public function setSecLvl($secLvl){
           if($secLvl < 6 || $secLvl > 10){
-            throw new Exception("security level not valid for boss class");
+            throw new invalidSecLvl;
           }
           $this -> secLvl = $secLvl;
         }
         public function __toString(){
           return parent::__toString()
           . "<h3>" . $this -> benefits ."</h3>"
-          . $this -> getEmployesStr();
+          . $this -> getEmployeesStr();
         }
       }
 
+      class invalidName extends Exception{};
+      class invalidRal extends Exception{};
+      class invalidSecLvl extends Exception{};
+      class invalidEmployeesList extends Exception{};
+      class invalidGenre extends Exception{};
 
         $a = new Employee('tozzi' , 'fan' , "25/12/1989" , "M" , "ragioniere" , 10001 , 4);
 
@@ -172,11 +177,23 @@
         $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
 
       try {
-        $newperson = new Person('ca' , 'zu' , '11/11/2011' ,'m');
-      } catch (Exception $e) {
-        echo $e;
+        $bestBoss = new Boss('mega' , 'direttore' , '25/12/1998', 'F' ,'megadirettore' , 20000 , 8 , 'personal boat party every week' );
       }
-
+        catch (invalidName $e) {
+          echo 'name too short';
+        }
+        catch (invalidRal $e){
+          echo 'R.A.L not valid';
+        }
+        catch (invalidSecLvl $e){
+          echo "invalid security level";
+        }
+        catch (invalidGenre $e){
+          echo 'invalid genre character';
+        }
+        catch(invalidEmployeesList $e){
+          echo 'invalide employees list';
+        }
 
     ?>
   </body>
