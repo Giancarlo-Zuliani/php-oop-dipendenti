@@ -193,7 +193,7 @@
         $a = new Employee('tozzi' , 'fan' , "25/12/1989" , "M" , "ragioniere" , 10001 , 4);
         $b = new Employee('fan' ,'tozzi' , '25/15/1988' , "F" , "capitano", 15000 , 3);
         $emparr = [];
-        array_push($emparr , $a ,$b , );
+        array_push($emparr , $a ,$b);
         $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
         $bestBoss = new Boss('m' , 'direttore' , '25/12/1998', 'asd' ,'megadirettore' , 200 , 8 , 'personal boat party every week' );
       }
