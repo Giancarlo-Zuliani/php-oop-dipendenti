@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>PHP-OOP-DIPENDENTI</title>
     <script <script src="script/script.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
 
