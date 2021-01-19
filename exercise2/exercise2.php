@@ -208,8 +208,7 @@
             $b = new Employee('fan' ,'tozzi' , '25/15/1988' , "F" , "capitano", 15000 , 3);
             $emparr = [];
             array_push($emparr , $a ,$b);
-            $boss = new Boss('mega' , 'direttore' , '25/12/1955' , 'F' , 'megadirettore' ,25000 , 8 , 'barca' , $emparr);
-            $bestBoss = new Boss('mega' , 'er' , '25/12/1998', 'f' ,'megadirettore' , 20000 , 8 , 'personal boat party every week',$emparr );
+            $bestBoss = new Boss('mega' , 'direttore' , '25/12/1998', 'f' ,'megadirettore' , 20000 , 8 , 'personal boat party every week',$emparr );
           }
 
           catch (Exception $e) {
