@@ -96,7 +96,7 @@
       }
 
       $caio = new Employee ('caio' , 'santin' , "10/4/1989" ,'M' , "burn stuff" , "400$/week");
-      echo $cai0;
+      echo $caio;
 
       class Boss extends Employee {
         private $benefits;
